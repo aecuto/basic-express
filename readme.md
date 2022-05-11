@@ -17,3 +17,20 @@ $ npm i -D ts-node-dev
 # config script using ts-node-dev
 # ex. ts-node-dev server.ts
 ```
+
+### RESTful
+ - Method
+ - Body
+ - Params
+ - Query
+ - Header
+
+### Mongo Database
+ - Create
+ - Update
+ - Delete
+ - List
+
+### File
+ - Write file
+ - Read file
