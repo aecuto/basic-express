@@ -19,18 +19,11 @@ app.get("/movies", async (req: Request, res: Response) => {
   res.send(movies);
 });
 
-app.post("/movies", async (req: Request, res: Response) => {
-  const data: IMovie = {
-    name: "test",
-    price: 10,
-    details: "details",
-    image: {
-      url: "localhost/image.png",
-      name: "image.png",
-      size: 3434,
-    },
-  };
-  const movie = await Movie.create(data);
+interface MovieRequest extends Request {
+  body: IMovie;
+}
+app.post("/movies", async (req: MovieRequest, res: Response) => {
+  const movie = await Movie.create(req.body);
 
   res.send(movie);
 });
