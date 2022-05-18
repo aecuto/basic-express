@@ -35,4 +35,4 @@ const movieSchema = new Schema<MovieDocument>({
 });
 
 // 3. Create a Model.
-export const Movie = model<MovieDocument>("User", movieSchema);
+export const Movie = model<MovieDocument>("movies", movieSchema);

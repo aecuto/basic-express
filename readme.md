@@ -1,6 +1,25 @@
 # For Intern
 
-base on expores.js
+Movie store project using express.js
+### RESTful
+ - Method
+ - Body
+ - Params
+ - Query
+### Optional
+ - Header
+ - Middlewere
+
+### Mongo Database
+ - Create
+ - Update
+ - Delete
+ - List
+ - Get by Id
+
+### File
+ - Write file
+ - Read file
 
 # Setup Typescript
 
@@ -17,20 +36,3 @@ $ npm i -D ts-node-dev
 # config script using ts-node-dev
 # ex. ts-node-dev server.ts
 ```
-
-### RESTful
- - Method
- - Body
- - Params
- - Query
- - Header
-
-### Mongo Database
- - Create
- - Update
- - Delete
- - List
-
-### File
- - Write file
- - Read file
