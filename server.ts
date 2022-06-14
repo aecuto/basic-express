@@ -1,6 +1,14 @@
+// .env
+import dotenv from "dotenv";
+dotenv.config();
+
 import express, { Express, Request, Response } from "express";
 import bodyParser from "body-parser";
 import fileUpload, { UploadedFile } from "express-fileupload";
+
+//jwt
+import jwt from "jsonwebtoken";
+import jwtVerify from "./middleware";
 
 // Mongo
 import connectMongo from "./mongo";
@@ -20,15 +28,23 @@ app.use(express.static("uploads"));
 app.use(fileUpload());
 
 // App CRUD
-app.get("/movies", async (req: Request, res: Response) => {
+app.get("/login", async (req: Request, res: Response) => {
+  const token = jwt.sign(
+    { msg: "jwt-express", company: "20scoops" },
+    process.env.JWT_SECRET || "",
+    {
+      expiresIn: "1h",
+    }
+  );
+  res.send({ token });
+});
+
+app.get("/movies", jwtVerify, async (req: Request, res: Response) => {
   const movies = await Movie.find();
   res.send(movies);
 });
 
-interface MovieRequest extends Request {
-  body: IMovie;
-}
-app.post("/movies", async (req: MovieRequest, res: Response) => {
+app.post("/movies", jwtVerify, async (req: MovieRequest, res: Response) => {
   const image = req?.files?.image as UploadedFile;
   const uploadPath = __dirname + "/uploads/" + image.name;
 
@@ -45,12 +61,20 @@ app.post("/movies", async (req: MovieRequest, res: Response) => {
       name: image.name,
     },
   };
-  // const movie = await Movie.create(req.body);
 
   res.send(data);
+
+  // const movie = await Movie.create(data);
+
+  // res.send(movie);
 });
 
 // App listen
 app.listen(port, function () {
   console.log(`Server is listening on port ${port}`);
 });
+
+// types
+interface MovieRequest extends Request {
+  body: IMovie;
+}

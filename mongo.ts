@@ -1,9 +1,5 @@
 import { connect } from "mongoose";
 
-// .env
-import dotenv from "dotenv";
-dotenv.config();
-
 export default () => {
   try {
     // uri from mongo atlas
